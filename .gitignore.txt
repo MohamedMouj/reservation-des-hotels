@@ -1,0 +1,12 @@
+.DS_Store
+.idea/
+.vscode/
+.Dockerfile.txt
+.Dockerfile2.txt
+.docker-composer.yml
+
+# Dependencies & Build artifacts
+backend/vendor/
+backend/.env
+frontend/node_modules/
+frontend/build/
