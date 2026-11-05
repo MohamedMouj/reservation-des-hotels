@@ -10,3 +10,7 @@ backend/vendor/
 backend/.env
 frontend/node_modules/
 frontend/build/
+node_modules/
+frontend/package-lock.json
+frontend/package.json
+.gitignore
