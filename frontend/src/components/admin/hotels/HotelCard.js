@@ -1,4 +1,5 @@
 import React from 'react';
+import RoomCard from '../../rooms/RoomCard';
 
 const CarteHotel = ({ hotel, onEditer, onSupprimer }) => {
   return (
@@ -19,13 +20,7 @@ const CarteHotel = ({ hotel, onEditer, onSupprimer }) => {
           <p style={{ fontSize: '0.85em', color: '#999' }}>Aucune chambre enregistrée.</p>
         ) : (
           hotel.chambres.map(chambre => (
-            <div key={chambre.id} style={{ border: '1px solid #bbdefb', padding: '10px', borderRadius: '6px', background: '#f1f8fe', minWidth: '160px' }}>
-              <strong>N° {chambre.numero}</strong> ({chambre.type})
-              <div style={{ fontSize: '0.85em', marginTop: '5px' }}>{chambre.tarif_nuit} MAD / nuit</div>
-              <div style={{ fontSize: '0.8em', color: chambre.estDisponible ? 'green' : 'red', fontWeight: 'bold' }}>
-                {chambre.estDisponible ? 'Disponible' : 'Réservée'}
-              </div>
-            </div>
+            <RoomCard key={chambre.id} chambre={chambre} />
           ))
         )}
       </div>
