@@ -8,9 +8,12 @@ function Header() {
         <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
           <Link to="/" style={{ textDecoration: 'none', color: '#333' }}>Réservation Hôtel</Link>
         </div>
-        <nav>
-          <Link to="/login" style={{ marginRight: '15px', textDecoration: 'none', color: '#007bff' }}>Connexion</Link>
-          <Link to="/register" style={{ textDecoration: 'none', color: '#007bff' }}>Inscription</Link>
+        <nav style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+          {/* <Link to="/login" style={{ marginRight: '15px', textDecoration: 'none', color: '#007bff' }}>Connexion</Link>
+          <Link to="/" style={{ textDecoration: 'none', color: '#007bff' }}>Inscription</Link> */}
+          <Link to="/home" style={{ textDecoration: 'none', color: '#007bff' }}>hotels</Link>
+          <Link to="/clientreservations" style={{ textDecoration: 'none', color: '#007bff' }}>Reservations</Link>
+
           <span style={{ margin: '0 10px', color: '#666' }}>|</span>
           <span style={{ color: '#666' }}>Espace Client</span>
         </nav>
