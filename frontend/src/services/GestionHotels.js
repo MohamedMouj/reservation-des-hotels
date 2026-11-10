@@ -12,6 +12,11 @@ class GestionHotelsService {
     );
   }
 
+  async getHotel(id) {
+    const response = await api.get(`${API_URL}/${id}`);
+    return new Hotel(response.data.id, response.data.nom, response.data.address, response.data.description, response.data.ville, response.data.chambres || []);
+  }
+
   // CREATE: Add new hotel
   async ajouterHotel(hotelData) {
     const response = await api.post(API_URL, hotelData);
@@ -62,6 +67,41 @@ class GestionHotelsService {
       h.ville.toLowerCase().includes(lowerTerm) ||
       h.description.toLowerCase().includes(lowerTerm)
     );
+  }
+
+  filterHotelsParVille(hotels, ville) {
+    if (!ville) return hotels;
+    return hotels.filter(h => h.ville.toLowerCase() === ville.toLowerCase());
+  }
+
+  filterHotelsParPrix(hotels, prixMax) {
+    if (!prixMax) return hotels;
+    return hotels.filter(h => h.getPrixMoyenChambres() <= prixMax);
+  }
+
+  filterHotelsParDisponibilite(hotels, disponible) {
+    if (disponible === undefined) return hotels;
+    return hotels.filter(h => h.getNombreChambresDisponibles() > 0 === disponible);
+  }
+
+  filterHotelsParCapacite(hotels, capacite) {
+    if (!capacite) return hotels;
+    return hotels.filter(h => h.chambres.some(c => c.capacite >= capacite));
+  }
+
+  filterHotelsParType(hotels, type) {
+    if (!type) return hotels;
+    return hotels.filter(h => h.chambres.some(c => c.type === type));
+  }
+
+  filterHotelsParEtoiles(hotels, etoiles) {
+    if (!etoiles) return hotels;
+    return hotels.filter(h => h.etoiles === etoiles);
+  }
+
+  filterHotelsParDistanceVilleٌRepere(hotels, distanceMax) {
+    if (!distanceMax) return hotels;
+    return hotels.filter(h => h.distanceVilleRepere <= distanceMax);
   }
 }
 
