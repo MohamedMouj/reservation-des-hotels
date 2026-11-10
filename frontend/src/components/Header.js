@@ -11,7 +11,7 @@ function Header() {
         <nav style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           {/* <Link to="/login" style={{ marginRight: '15px', textDecoration: 'none', color: '#007bff' }}>Connexion</Link>
           <Link to="/" style={{ textDecoration: 'none', color: '#007bff' }}>Inscription</Link> */}
-          <Link to="/home" style={{ textDecoration: 'none', color: '#007bff' }}>hotels</Link>
+          <Link to="/" style={{ textDecoration: 'none', color: '#007bff' }}>hotels</Link>
           <Link to="/clientreservations" style={{ textDecoration: 'none', color: '#007bff' }}>Reservations</Link>
 
           <span style={{ margin: '0 10px', color: '#666' }}>|</span>
