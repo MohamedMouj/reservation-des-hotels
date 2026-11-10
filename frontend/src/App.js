@@ -1,17 +1,34 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
-import Home from './pages/Home';
-import Contact from './pages/Contact';
+import AdminLayout from './layouts/AdminLayout';
+import AboutUs from './pages/client/aboutus';
+import AdminHome from './pages/admin/Home';
+import Home from './pages/client/Home';
+import Contact from './pages/client/Contact';
 import './App.css';
+import Reservations from './pages/admin/Reservations';
+import Users from './pages/admin/Users';
+import ClientReservations from './pages/client/clientreservations';
+import Analysis from './pages/admin/analysis';
+import Hotel from './pages/client/hotel';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home />} />
+          <Route path="" element={<Home />} />
+          <Route path="hotel/:id" element={<Hotel />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="aboutus" element={<AboutUs />} />
+          <Route path="clientreservations" element={<ClientReservations />} />
+        </Route> 
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="" element={<AdminHome />} />
+          <Route path="reservations" element={<Reservations />} />   
+          <Route path="users" element={<Users />} />
+          <Route path="analysis" element={<Analysis />} />
         </Route>
       </Routes>
     </BrowserRouter>
