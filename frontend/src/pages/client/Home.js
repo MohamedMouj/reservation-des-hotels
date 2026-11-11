@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import gestionHotelsService from "../../services/GestionHotels"
+import { Link } from 'react-router-dom'
 
 function Home() {
   const [hotels, setHotels] = useState([])
@@ -102,6 +103,7 @@ function Home() {
                 <h3>{hotel.nom}</h3>
                 <p>Ville: {hotel.ville}</p>
                 <p>Prix: {hotel.prix}€</p>
+                <Link to={`/hotel/${hotel.id}`}>details</Link><br/>
                 <button>Réserver</button>
               </div>
             )
