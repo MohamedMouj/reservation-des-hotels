@@ -15,9 +15,14 @@ function Home() {
     try {
       setLoading(true);
       const data = await gestionHotelsService.getToutesHotels();
-      setHotels(data);
-    } catch (error) {
-      setError(error);
+      if(data){
+      setHotels(data);}
+      else{
+        setHotels([]);
+      }
+    }
+    catch (error) {
+      setError(error instanceof Error ? error.message : String(error));
     } finally {
       setLoading(false);
     }

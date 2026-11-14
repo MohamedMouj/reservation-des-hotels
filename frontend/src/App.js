@@ -6,12 +6,15 @@ import AboutUs from './pages/client/aboutus';
 import AdminHome from './pages/admin/Home';
 import Home from './pages/client/Home';
 import Contact from './pages/client/Contact';
+import Login from './pages/client/Login';
 import './App.css';
 import Reservations from './pages/admin/Reservations';
 import Users from './pages/admin/Users';
 import ClientReservations from './pages/client/clientreservations';
 import Analysis from './pages/admin/analysis';
 import Hotel from './pages/client/hotel';
+import AdminGuard from './components/AdminGuard';
+import Register from './pages/client/Register';
 
 function App() {
   return (
@@ -23,8 +26,10 @@ function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="aboutus" element={<AboutUs />} />
           <Route path="clientreservations" element={<ClientReservations />} />
+          <Route path="login" element={<Login/>} />
+          <Route path="register" element={<Register/>} />
         </Route> 
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin" element={ <AdminGuard><AdminLayout /> </AdminGuard>}>
           <Route path="" element={<AdminHome />} />
           <Route path="reservations" element={<Reservations />} />   
           <Route path="users" element={<Users />} />

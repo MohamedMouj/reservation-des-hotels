@@ -11,7 +11,7 @@ Route::get('/user', function (Request $request) {
 
 
 
-Route::middleware(['auth:sanctum', 'admin'])->get('/hotels', [HotelController::class, 'index']);
+Route::get('/hotels', [HotelController::class, 'index']);
 Route::get('/hotels/{id}', [HotelController::class, 'getHotelById']);
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
