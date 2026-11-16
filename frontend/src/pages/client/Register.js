@@ -7,6 +7,7 @@ function Register() {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [telephone, setTelephone] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [erreur, setErreur] = useState('');
@@ -25,7 +26,8 @@ function Register() {
         name,
         email,
         password,
-        passwordConfirmation
+        passwordConfirmation,
+        telephone
       );
 
       if (user.role === 'admin') {
@@ -66,6 +68,17 @@ function Register() {
           />
         </div>
 
+        <div>
+          <label htmlFor="telephone">Téléphone (facultatif)</label>
+          <input
+            id="telephone"
+            type="tel"
+            autoComplete="tel"
+            maxLength={32}
+            value={telephone}
+            onChange={(event) => setTelephone(event.target.value)}
+          />
+        </div>
         <div>
           <label htmlFor="password">Mot de passe</label>
           <input
