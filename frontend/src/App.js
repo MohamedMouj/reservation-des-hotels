@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import AdminLayout from './layouts/AdminLayout';
 import AboutUs from './pages/client/aboutus';
@@ -15,6 +15,7 @@ import Analysis from './pages/admin/analysis';
 import Hotel from './pages/client/hotel';
 import AdminGuard from './components/AdminGuard';
 import Register from './pages/client/Register';
+import AdminRooms from './pages/admin/Rooms';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="reservations" element={<Reservations />} />   
           <Route path="users" element={<Users />} />
           <Route path="analysis" element={<Analysis />} />
+          <Route path="hotels/:hotelId/rooms" element={<AdminRooms />} />
         </Route>
       </Routes>
     </BrowserRouter>
