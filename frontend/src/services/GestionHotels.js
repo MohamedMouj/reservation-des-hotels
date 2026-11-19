@@ -8,13 +8,61 @@ class GestionHotelsService {
   async getToutesHotels() {
     const response = await api.get(API_URL);
     return response.data.map(data => 
-      new Hotel(data.id, data.nom, data.address, data.description, data.ville, data.chambres || [])
+      new Hotel(
+        data.id,
+        data.nom,
+        data.address,
+        data.description,
+        data.ville,
+        data.chambres || [],
+        data.avis || [],
+        data.avis_count
+      )
     );
   }
 
   async getHotel(id) {
     const response = await api.get(`${API_URL}/${id}`);
-    return new Hotel(response.data.id, response.data.nom, response.data.address, response.data.description, response.data.ville, response.data.chambres || []);
+    return new Hotel(
+      response.data.id,
+      response.data.nom,
+      response.data.address,
+      response.data.description,
+      response.data.ville,
+      response.data.chambres || [],
+      response.data.avis || [],
+      response.data.avis_count
+    );
+  }
+
+  async rechercherChambresDisponibles(criteres) {
+    const response = await api.get('/rooms/availability', { params: criteres });
+    return response.data;
+  }
+
+  async ajouterAvis(hotelId, avis) {
+    const response = await api.post(`${API_URL}/${hotelId}/avis`, avis);
+    return response.data;
+  }
+
+  async getAvis(hotelId, page = 1) {
+    const response = await api.get(`${API_URL}/${hotelId}/avis`, { params: { page } });
+    return response.data;
+  }
+
+  async ajouterChambre(hotelId, chambre) {
+    const response = await api.post(`${API_URL}/${hotelId}/rooms`, chambre);
+    return response.data;
+  }
+
+  async modifierChambre(hotelId, chambreId, chambre) {
+    const response = await api.put(`${API_URL}/${hotelId}/rooms/${chambreId}`, chambre);
+    return response.data;
+  }
+
+  async supprimerChambre(hotelId, chambreId) {
+    const response = await api.delete(`${API_URL}/${hotelId}/rooms/${chambreId}`);
+    return response.data;
   }
 
   // CREATE: Add new hotel
@@ -76,12 +124,12 @@ class GestionHotelsService {
 
   filterHotelsParPrix(hotels, prixMax) {
     if (!prixMax) return hotels;
-    return hotels.filter(h => h.getPrixMoyenChambres() <= prixMax);
+    return hotels.filter(h => h.getTarifMoyen() <= prixMax);
   }
 
   filterHotelsParDisponibilite(hotels, disponible) {
     if (disponible === undefined) return hotels;
-    return hotels.filter(h => h.getNombreChambresDisponibles() > 0 === disponible);
+    return hotels.filter(h => (h.getNombreChambresDisponibles() > 0) === disponible);
   }
 
   filterHotelsParCapacite(hotels, capacite) {
