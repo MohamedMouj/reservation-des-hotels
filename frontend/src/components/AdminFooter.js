@@ -1,14 +1,9 @@
-import { Link } from 'react-router-dom'
-
-function Footer() {
+function AdminFooter() {
   return (
-    <>
-      <footer style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px', textAlign: 'center', backgroundColor: '#f8f9fa', borderTop: '1px solid #ddd', marginTop: '40px', position: 'fixed', bottom: 0, width: '100%' }}>
-        <p>&copy; {new Date().getFullYear()} Réservation Hôtels. Tous droits réservés.</p>
-        {/* <Link to="/contact" style={{ textDecoration: 'none', color: '#007bff' }}>Contactez-nous</Link>  */}
-      </footer>
-    </>
-  )
+    <footer className="site-footer">
+      <p>&copy; {new Date().getFullYear()} Réservation Hôtels. Tous droits réservés.</p>
+    </footer>
+  );
 }
 
-export default Footer;
+export default AdminFooter;

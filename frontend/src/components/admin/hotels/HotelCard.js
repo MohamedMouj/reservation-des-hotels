@@ -1,5 +1,6 @@
 import React from 'react';
 import RoomCard from '../../rooms/RoomCard';
+import { Link } from 'react-router-dom';
 
 const CarteHotel = ({ hotel, onEditer, onSupprimer }) => {
   return (
@@ -26,6 +27,9 @@ const CarteHotel = ({ hotel, onEditer, onSupprimer }) => {
       </div>
 
       <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
+        <Link className="button-link" to={`/admin/hotels/${hotel.id}/rooms`}>
+          Gérer les chambres
+        </Link>
         <button onClick={() => onEditer(hotel)} style={{ padding: '8px 15px', background: '#2196F3', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer' }}>
           Modifier
         </button>

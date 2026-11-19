@@ -8,10 +8,10 @@ function Header() {
           <Link to="/" style={{ textDecoration: 'none', color: '#333' }}>Réservation Hôtel</Link>
         </div>
         <nav style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-          <Link to="users" style={{ textDecoration: 'none', color: '#007bff' }}>Manage users</Link>
-          <Link to="analysis" style={{ textDecoration: 'none', color: '#007bff' }}>Analysis</Link>
-          <Link to="/admin" style={{ textDecoration: 'none', color: '#007bff' }}>Manage hotels</Link>
-          <Link to="reservations" style={{ textDecoration: 'none', color: '#007bff' }}>Reservations</Link>
+          <Link to="users" style={{ textDecoration: 'none', color: '#007bff' }}>Utilisateurs</Link>
+          <Link to="analysis" style={{ textDecoration: 'none', color: '#007bff' }}>Analyses</Link>
+          <Link to="/admin" style={{ textDecoration: 'none', color: '#007bff' }}>Hôtels</Link>
+          <Link to="reservations" style={{ textDecoration: 'none', color: '#007bff' }}>Réservations</Link>
 
           <span style={{ margin: '0 10px', color: '#666' }}>|</span>
           <span style={{ color: '#666' }}>Espace Admin</span>
