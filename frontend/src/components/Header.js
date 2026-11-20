@@ -52,7 +52,7 @@ function Header() {
             to="/clientreservations"
             style={{ textDecoration: "none", color: "#007bff" }}
           >
-            Reservations
+            Mes réservations
           </Link>
 
           <span style={{ margin: "0 10px", color: "#666" }}>|</span>

@@ -1,18 +1,15 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 export default function MainLayout() {
   return (
-    <div>
+    <div className="site-shell">
       <Header/>
-
-      <main style={{ padding: '20px' }}>
-        {/* The current page gets injected here */}
-        <Outlet /> 
+      <main className="site-main">
+        <Outlet />
       </main>
-
       <Footer/>
     </div>
   );

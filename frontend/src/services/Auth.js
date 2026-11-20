@@ -10,9 +10,9 @@ class GestionAuth {
     return user;                      // the page reads user.role for redirection
   }
 
-  async register(name, email, password, password_confirmation) {
+  async register(name, email, password, password_confirmation, telephone) {
     const reponse = await api.post('/register', {
-      name, email, password, password_confirmation,
+      name, email, password, password_confirmation, telephone,
     });
     const { access_token, user } = reponse.data;
 
@@ -40,4 +40,6 @@ class GestionAuth {
   }
 }
 
-export default new GestionAuth();
+const gestionAuth = new GestionAuth();
+
+export default gestionAuth;

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import GestionHotelsService from '../../services/GestionHotels';
 import ListeHotels from '../../components/admin/hotels/ListeHotels';
 import FormulaireHotel from '../../components/admin/hotels/FormulaireHotel';
 import Statistiques from '../../components/admin/hotels/Statistique';
+import messageErreur from '../../services/messageErreur';
 
 
 function AdminHome() {
@@ -12,41 +13,58 @@ function AdminHome() {
   const [showForm, setShowForm] = useState(false);
   const [recherche, setRecherche] = useState('');
   const [loading, setLoading] = useState(true);
-  const [error, setError]=useState(null)
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
 
-  useEffect(() => {
-    chargerHotels();
-  }, []);
-
-  const chargerHotels = async () => {
+  const chargerHotels = useCallback(async () => {
     try {
       setLoading(true);
+      setError('');
       const data = await service.getToutesHotels();
       setHotels(data);
     } catch (error) {
-      setError("Erreur lors du chargement des hôtels");
+      setError(messageErreur(error, 'Erreur lors du chargement des hôtels.'));
     } finally {
       setLoading(false);
     }
-  };
+  }, [service]);
+
+  useEffect(() => {
+    chargerHotels();
+  }, [chargerHotels]);
 
   const ajouterHotel = async (hotelData) => {
-    await service.ajouterHotel(hotelData);
-    chargerHotels();
-    setShowForm(false);
+    try {
+      await service.ajouterHotel(hotelData);
+      await chargerHotels();
+      setMessage('Hôtel ajouté.');
+      setShowForm(false);
+    } catch (error) {
+      setError(messageErreur(error, 'L’hôtel n’a pas pu être ajouté.'));
+    }
   };
 
   const modifierHotel = async (id, donneesModifiees) => {
-    await service.modifierHotel(id, donneesModifiees);
-    chargerHotels();
-    setHotelEdit(null);
-    setShowForm(false);
+    try {
+      await service.modifierHotel(id, donneesModifiees);
+      await chargerHotels();
+      setMessage('Hôtel modifié.');
+      setHotelEdit(null);
+      setShowForm(false);
+    } catch (error) {
+      setError(messageErreur(error, 'L’hôtel n’a pas pu être modifié.'));
+    }
   };
 
   const supprimerHotel = async (id) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer cet hôtel ?')) {
-      await service.supprimerHotel(id);
-      chargerHotels();
+      try {
+        await service.supprimerHotel(id);
+        await chargerHotels();
+        setMessage('Hôtel supprimé.');
+      } catch (error) {
+        setError(messageErreur(error, 'L’hôtel n’a pas pu être supprimé.'));
+      }
     }
   };
 
@@ -72,6 +90,8 @@ function AdminHome() {
 
       <div className="app-container" style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 20px' }}>
         <Statistiques stats={stats} />
+        {error && <p className="feedback feedback-error" role="alert">{error}</p>}
+        {message && <p className="feedback feedback-success" role="status">{message}</p>}
 
         <div style={{ display: 'flex', gap: '15px', marginBottom: '20px' }}>
           <input
